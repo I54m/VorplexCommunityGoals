@@ -1,0 +1,16 @@
+name: VorplexCommunityGoals
+author: I54m
+website: https://i54m.com
+version: ${project.version}
+description: A plugin to add community goals/quests for player to contribute items globally for a shared reward.
+api-version: '1.21.8'
+main: net.vorplex.communitygoals.VorplexCommunityGoals
+bootstrap: net.vorplex.communitygoals.plugin.PaperBootstrap
+loader: net.vorplex.communitygoals.plugin.PaperLoader
+
+dependencies:
+  server:
+
+
+permissions:
+

@@ -17,9 +17,9 @@ public final class VorplexCommunityGoals extends JavaPlugin {
         getComponentLogger().info(Component.text("╚██╗ ██╔╝██║   ██║██╔══██╗██╔═══╝ ██║     ██╔══╝   ██╔██╗").color(NamedTextColor.LIGHT_PURPLE));
         getComponentLogger().info(Component.text(" ╚████╔╝ ╚██████╔╝██║  ██║██║     ███████╗███████╗██╔╝ ██╗").color(NamedTextColor.LIGHT_PURPLE));
         getComponentLogger().info(Component.text("  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚══════╝╚══════╝╚═╝  ╚═╝").color(NamedTextColor.LIGHT_PURPLE));
-        getComponentLogger().info(Component.text("       ___  __                    __   __   __   ___").color(NamedTextColor.DARK_PURPLE));
-        getComponentLogger().info(Component.text("        |  /  \\ |  | |\\ | \\ /    /  ` /  \\ |__) |__ ").color(NamedTextColor.DARK_PURPLE));
-        getComponentLogger().info(Component.text("        |  \\__/ |/\\| | \\|  |     \\__, \\__/ |  \\ |___").color(NamedTextColor.DARK_PURPLE));
+        getComponentLogger().info(Component.text("       ").color(NamedTextColor.DARK_PURPLE));
+        getComponentLogger().info(Component.text("        ").color(NamedTextColor.DARK_PURPLE));
+        getComponentLogger().info(Component.text("        ").color(NamedTextColor.DARK_PURPLE));
         getComponentLogger().info("───────────────────────────────────────────────────────────");
         getComponentLogger().info(Component.text("Developed by I54m").color(NamedTextColor.RED));
         getComponentLogger().info(Component.text("v" + getPluginMeta().getVersion() + " Running on " + getServer().getVersion()).color(NamedTextColor.RED));

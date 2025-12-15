@@ -1,0 +1,30 @@
+goals:
+  log_stone_weekly:
+    name: "Lumber & Masonry"
+    description: "Contribute logs and stone!"
+    enabled: true
+    start-time: "2025-01-01T00:00:00Z"
+    end-time: "2025-01-07T00:00:00Z"
+
+    required-items:
+      OAK_LOG: 10000
+      STONE: 20000
+
+  nether_push:
+    name: "Nether Expansion"
+    description: "Prepare resources for the Nether build."
+    start-time: "2025-01-01T00:00:00Z"
+    end-time: "2025-01-07T00:00:00Z"
+
+    required-items:
+      NETHERRACK: 30000
+      QUARTZ: 5000
+      MAGMA_BLOCK: 2500
+    #unused at this stage
+    rewards:
+      5:
+        commands:
+          - "give %player% diamond 3"
+      10:
+        commands:
+          - "give %player% diamond 3"

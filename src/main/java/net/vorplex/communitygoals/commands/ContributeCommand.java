@@ -26,9 +26,9 @@ public class ContributeCommand {
                 ).build();
 
     private static CompletableFuture<Suggestions> getGoalSuggestions(final CommandContext<CommandSourceStack> ctx, final SuggestionsBuilder builder) {
-        plugin.GOAL_CONTROLLER.getGoals().forEach((goalID, goal) -> {
-            builder.suggest(goalID);
-        });
+        plugin.GOAL_CONTROLLER.getGoals().forEach((goalID, goal) ->
+            builder.suggest(goalID)
+        );
         return builder.buildFuture();
     }
 

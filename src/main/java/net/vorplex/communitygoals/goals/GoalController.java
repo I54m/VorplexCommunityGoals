@@ -73,9 +73,9 @@ public class GoalController {
         PLUGIN.getComponentLogger().info(Component.text("Attempting to load Goals from config...").color(NamedTextColor.GREEN));
         Objects.requireNonNull(PLUGIN.CONFIG.getConfigurationSection("goals")).getKeys(false).forEach(goalID -> {
             Map<Material, Integer> reqItems = new HashMap<>();
-            Objects.requireNonNull(PLUGIN.getConfig().getConfigurationSection("goals." + goalID + ".required-items")).getKeys(false).forEach(itemID -> {
-                reqItems.put(Material.getMaterial(itemID), PLUGIN.getConfig().getInt("goals." + goalID + ".required-items." + itemID));
-            });
+            Objects.requireNonNull(PLUGIN.getConfig().getConfigurationSection("goals." + goalID + ".required-items")).getKeys(false).forEach(itemID ->
+                reqItems.put(Material.getMaterial(itemID), PLUGIN.getConfig().getInt("goals." + goalID + ".required-items." + itemID))
+            );
 
             ConfigurationSection goalConfig = Objects.requireNonNull(PLUGIN.CONFIG.getConfigurationSection("goals." + goalID));
             Goal goal = new Goal(goalID,

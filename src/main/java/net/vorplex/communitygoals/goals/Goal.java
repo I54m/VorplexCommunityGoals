@@ -69,7 +69,6 @@ public class Goal {
         CheckForCompletion();
     }
 
-
     public void RemoveAllContributions(@NotNull UUID playerUUID) {
         Objects.requireNonNull(goalData);
         Map<Material, Integer> toRemove = goalData.getContributors().get(playerUUID).getContributions();
@@ -82,6 +81,22 @@ public class Goal {
         requiredItems.forEach((material, required) -> completed.put(material, goalData.getCurrentItems().getOrDefault(material, 0).equals(required)));
         this.goalData.setCompleted(!completed.containsValue(false));
     }
+
+    public Map<Material, Integer> getItemsNeeded() {
+        Objects.requireNonNull(goalData);
+        Map<Material, Integer> itemsNeeded = new HashMap<>();
+        requiredItems.forEach((material, required) -> {
+            if (required <= 0) {
+                itemsNeeded.put(material, 0);
+                return;
+            }
+
+            int neededItems = required - goalData.getCurrentItems().getOrDefault(material, 0);
+            itemsNeeded.put(material, neededItems);
+        });
+        return itemsNeeded;
+    }
+
 
     public Map<Material, Double> getCompletionPercentages() {
         Objects.requireNonNull(goalData);

@@ -76,11 +76,6 @@ public class Goal {
         toRemove.keySet().forEach(material -> goalData.getCurrentItems().compute(material, (k, current) -> current - toRemove.get(material)));
     }
 
-    public void ChangeRequirements(@NotNull Map<Material, Integer> requiredItems){
-        this.requiredItems.clear();
-        this.requiredItems.putAll(Objects.requireNonNull(requiredItems));
-    }
-
     public void CheckForCompletion() {
         Objects.requireNonNull(goalData);
         Map<Material, Boolean> completed = new HashMap<>();

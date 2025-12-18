@@ -29,7 +29,7 @@ public class PlayerContributions {
         this(goal.getGoalID(), player.getUniqueId());
     }
 
-    public void AddContribution(@NotNull Map<Material, Integer> contribution) {
+    public void AddItems(@NotNull Map<Material, Integer> contribution) {
         contribution.keySet().forEach(material -> {
             contributions.put(material, contributions.get(material) + contribution.get(material));
         });

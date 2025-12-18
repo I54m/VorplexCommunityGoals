@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class PlayerContributions {
+public class PlayerContribution {
 
     @Getter @NotNull
     private final String goalID;
@@ -20,12 +20,12 @@ public class PlayerContributions {
     private final Map<Material, Integer> contributions = new HashMap<>();
 
 
-    public PlayerContributions(@NotNull String goalID, @NotNull UUID playerUUID) {
+    public PlayerContribution(@NotNull String goalID, @NotNull UUID playerUUID) {
         this.goalID = goalID;
         this.playerUUID = playerUUID;
     }
 
-    public PlayerContributions(@NotNull Goal goal, @NotNull Player player) {
+    public PlayerContribution(@NotNull Goal goal, @NotNull Player player) {
         this(goal.getGoalID(), player.getUniqueId());
     }
 

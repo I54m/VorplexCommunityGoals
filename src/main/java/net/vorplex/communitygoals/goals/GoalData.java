@@ -17,11 +17,11 @@ public class GoalData {
     @Getter
     private final Map<Material, Integer> currentItems = new HashMap<>();
     @Getter
-    private final Map<UUID, PlayerContributions> contributors = new HashMap<>();
+    private final Map<UUID, PlayerContribution> contributors = new HashMap<>();
     @Getter @Setter
     private boolean completed;
 
-    public GoalData(@NotNull String GoalID, boolean completed, @NotNull Map<Material, Integer> currentItems, @NotNull Map<UUID, PlayerContributions> contributors) {
+    public GoalData(@NotNull String GoalID, boolean completed, @NotNull Map<Material, Integer> currentItems, @NotNull Map<UUID, PlayerContribution> contributors) {
         this.goalID = Objects.requireNonNull(GoalID);
         this.completed = completed;
         this.currentItems.putAll(Objects.requireNonNull(currentItems));

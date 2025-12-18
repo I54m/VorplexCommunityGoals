@@ -53,11 +53,11 @@ public class Goal {
         return Instant.parse(input).toEpochMilli();
     }
 
-    public void AddContribution(@NotNull PlayerContributions contribution) {
+    public void AddContribution(@NotNull PlayerContribution contribution) {
         Objects.requireNonNull(goalData);
         if (contribution.getGoalID().equals(this.goalID)) throw new IllegalArgumentException("This contribution is not for this goal!");
         if (goalData.getContributors().containsKey(contribution.getPlayerUUID()))
-            goalData.getContributors().get(contribution.getPlayerUUID()).AddContribution(contribution.getContributions());
+            goalData.getContributors().get(contribution.getPlayerUUID()).AddItems(contribution.getContributions());
         else goalData.getContributors().put(contribution.getPlayerUUID(), contribution);
 
         contribution.getContributions().keySet().forEach(contributionMaterial -> {

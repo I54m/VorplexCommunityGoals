@@ -5,11 +5,11 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.jetbrains.annotations.NotNull;
 
-public class MenuHolder implements InventoryHolder {
+public class ContributionMenuHolder implements InventoryHolder {
 
     private final Inventory inventory;
 
-    public MenuHolder(VorplexCommunityGoals plugin) {
+    public ContributionMenuHolder(VorplexCommunityGoals plugin) {
         this.inventory = plugin.getServer().createInventory(this, 54);
     }
 
@@ -17,4 +17,6 @@ public class MenuHolder implements InventoryHolder {
     public @NotNull Inventory getInventory() {
         return inventory;
     }
+
+
 }

@@ -7,6 +7,8 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.vorplex.communitygoals.commands.ContributeCommand;
 import net.vorplex.communitygoals.goals.GoalController;
+import net.vorplex.communitygoals.inventory.InventoryClickListener;
+import net.vorplex.communitygoals.inventory.InventoryCloseListener;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 

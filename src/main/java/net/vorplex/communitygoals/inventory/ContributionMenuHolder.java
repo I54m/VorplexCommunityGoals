@@ -34,9 +34,7 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
     private final ItemStack dividerItem;
     private final ItemStack controlItem;
     //TODO better control item lore
-    private ItemLore.Builder controlItemLore = ItemLore.lore()
-            .addLine(Component.text("/\\ Required Items").style(defaultStyle))
-            .addLine(Component.text("\\/ Items to contribute").style(defaultStyle));
+    private List<Component> controlItemLore = new ArrayList<>();
     private final List<ItemStack> goalItems;
     private final Goal goal;
 
@@ -65,21 +63,14 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
         if (goalItems.size() > 9)
             throw new IllegalStateException("Too many goal items for single-row GUI");
 
-        //allow 99 sized stacks to be contributed
-        this.inventory.setMaxStackSize(99);
+        // Fill top 2 rows with dividers
+        for (int i = 0; i < 18; i++)
+            inventory.setItem(i, dividerItem);
 
-
-
-        this.inventory.setItem(9, dividerItem);
-        this.inventory.setItem(10, dividerItem);
-        this.inventory.setItem(11, dividerItem);
-        this.inventory.setItem(12, dividerItem);
-
-        this.inventory.setItem(14, dividerItem);
-        this.inventory.setItem(15, dividerItem);
-        this.inventory.setItem(16, dividerItem);
-        this.inventory.setItem(17, dividerItem);
-
+        controlItemLore.add(Component.text("/\\ Required Items").style(defaultStyle));
+        controlItemLore.add(Component.text("\\/ Items to contribute").style(defaultStyle));
+        controlItemLore.add(Component.text(goal.getTotalCompletionPercent()*100 + "% completed").style(defaultStyle));
+        controlItemLore.add(buildProgressBar(goal.getTotalCompletionPercent()));
     }
 
     @Override
@@ -101,9 +92,7 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
             );
         });
 
-        // Fill top row with dividers
-        for (int i = 0; i < 9; i++)
-            inventory.setItem(i, dividerItem);
+
 
         //TODO blank center spot if % 2
         // Center goal items
@@ -112,10 +101,11 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
             inventory.setItem(startSlot + i, goalItems.get(i));
         }
 
-        controlItem.setData(DataComponentTypes.LORE, controlItemLore
-                .addLine(Component.text(goal.getTotalCompletionPercent()*100 + "% completed").style(defaultStyle))
-                .addLine(buildProgressBar(goal.getTotalCompletionPercent()))
-                .build());
+        controlItemLore.set(2, Component.text(goal.getTotalCompletionPercent()*100 + "% completed").style(defaultStyle));
+        controlItemLore.set(3, buildProgressBar(goal.getTotalCompletionPercent()));
+
+        controlItem.setData(DataComponentTypes.LORE, ItemLore.lore().lines(controlItemLore));
+
         this.inventory.setItem(13, controlItem);
 
         return inventory;

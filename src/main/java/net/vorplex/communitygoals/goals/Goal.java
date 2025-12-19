@@ -109,7 +109,7 @@ public class Goal {
                 percentages.put(material, 1.0);
                 return;
             }
-
+            //TODO round to 2 dp
             double progress = (double) goalData.getCurrentItems().getOrDefault(material, 0) / required;
             percentages.put(material, Math.min(1.0, progress));
         });
@@ -127,7 +127,7 @@ public class Goal {
             weightedProgress += percentages.get(material) * required;
             totalRequired += required;
         }
-
+        //TODO round to 2 dp
         return totalRequired == 0 ? 1.0 : weightedProgress / totalRequired;
     }
 }

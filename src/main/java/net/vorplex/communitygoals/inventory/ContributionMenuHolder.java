@@ -69,8 +69,8 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
 
         controlItemLore.add(Component.text("/\\ Required Items").style(defaultStyle));
         controlItemLore.add(Component.text("\\/ Items to contribute").style(defaultStyle));
-        controlItemLore.add(Component.text(goal.getTotalCompletionPercent()*100 + "% completed").style(defaultStyle));
-        controlItemLore.add(buildProgressBar(goal.getTotalCompletionPercent()));
+        controlItemLore.add(Component.text("% completed").style(defaultStyle));
+        controlItemLore.add(buildProgressBar(0));
     }
 
     @Override

@@ -43,7 +43,7 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
     private final Goal goal;
 
 
-    public ContributionMenuHolder(VorplexCommunityGoals plugin, Goal goal) {
+    public ContributionMenuHolder(Goal goal) {
         this.goal = Objects.requireNonNull(goal, "goal cannot be null");
         this.inventory = VorplexCommunityGoals.getInstance().getServer().createInventory(this, 54, Component.text(goal.getName()));
 

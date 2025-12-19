@@ -156,7 +156,8 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
         goal.AddContribution(contribution);
         //TODO more user feedback post contribution
         player.sendMessage(Component.text("Your contribution has been added to the total goal!").color(NamedTextColor.GREEN));
-        //TODO clear contribution items from inventory
+        for (int i = 18; i < inventory.getSize(); i++)
+            inventory.setItem(i, null);
     }
 
 

@@ -34,7 +34,8 @@ public class ContributeCommand {
 
     private static int executeCommand(final CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
         final Player player = (Player) ctx.getSource().getSender();
-
+        final String goalID = ctx.getArgument("goalID", String.class);
+        player.openInventory(plugin.GOAL_CONTROLLER.getGoal(goalID).getContributionMenu().getInventory());
         return Command.SINGLE_SUCCESS;
     }
 }

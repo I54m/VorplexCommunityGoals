@@ -96,7 +96,7 @@ public class Goal {
                 return;
             }
 
-            int neededItems = required - goalData.getCurrentItems().getOrDefault(material, 0);
+            int neededItems = goalData.getCurrentItems().getOrDefault(material, 0) - required;
             itemsNeeded.put(material, neededItems);
         });
         return itemsNeeded;

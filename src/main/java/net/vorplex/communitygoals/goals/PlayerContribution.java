@@ -30,6 +30,7 @@ public class PlayerContribution {
     }
 
     public void AddItems(@NotNull Map<Material, Integer> contribution) {
+        //TODO prevent over contributing - throw exception
         contribution.forEach((material, amount) -> {
             contributions.merge(material, amount, Integer::sum);
         });

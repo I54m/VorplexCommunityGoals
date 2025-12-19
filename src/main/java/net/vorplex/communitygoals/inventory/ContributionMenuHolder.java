@@ -4,6 +4,8 @@ import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.ItemLore;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.Style;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.vorplex.communitygoals.VorplexCommunityGoals;
 import net.vorplex.communitygoals.goals.Goal;
@@ -26,14 +28,15 @@ import java.util.*;
 public class ContributionMenuHolder implements InventoryHolder, Listener {
 
     private final NumberFormat nf = NumberFormat.getIntegerInstance(Locale.US);
+    private final Style defaultStyle = Style.style().color(NamedTextColor.WHITE).decoration(TextDecoration.ITALIC, false).build();
 
     private final Inventory inventory;
     private final ItemStack dividerItem;
     private final ItemStack controlItem;
     //TODO better control item lore
     private ItemLore.Builder controlItemLore = ItemLore.lore()
-            .addLine(Component.text("/\\ Required Items").color(NamedTextColor.WHITE))
-            .addLine(Component.text("\\/ Items to contribute").color(NamedTextColor.WHITE));
+            .addLine(Component.text("/\\ Required Items").style(defaultStyle))
+            .addLine(Component.text("\\/ Items to contribute").style(defaultStyle));
     private final List<ItemStack> goalItems;
     private final Goal goal;
 
@@ -46,7 +49,7 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
         dividerItem.setData(DataComponentTypes.CUSTOM_NAME, Component.text(" "));
 
         controlItem = new ItemStack(Material.NETHER_STAR, 1);
-        controlItem.setData(DataComponentTypes.CUSTOM_NAME, Component.text("Contributing towards " + goal.getName()));
+        controlItem.setData(DataComponentTypes.CUSTOM_NAME, Component.text("Contributing towards " + goal.getName()).style(defaultStyle));
 
         goalItems = new ArrayList<>();
 
@@ -54,9 +57,9 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
             ItemStack goalItem = new ItemStack(material);
             Component name = goalItem.displayName();
             if (goalItem.getType() != Material.BARRIER)
-                goalItem.setData(DataComponentTypes.CUSTOM_NAME, Component.text(nf.format(integer) + "x ERROR: Unknown Item!!").color(NamedTextColor.RED));
+                goalItem.setData(DataComponentTypes.CUSTOM_NAME, Component.text(nf.format(integer) + "x ERROR: Unknown Item!!").color(NamedTextColor.RED).decoration(TextDecoration.ITALIC, false));
             else
-                goalItem.setData(DataComponentTypes.CUSTOM_NAME, Component.text(nf.format(integer) + "x ").append(name));
+                goalItem.setData(DataComponentTypes.CUSTOM_NAME, Component.text(nf.format(integer) + "x ").append(name).style(defaultStyle));
             goalItems.add(new ItemStack(material));
         }));
         if (goalItems.size() > 9)
@@ -91,8 +94,8 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
             double completionPercentage = completionPercentages.get(material);
 
             goalItem.setData(DataComponentTypes.LORE, ItemLore.lore()
-                    .addLine(Component.text(nf.format(itemsNeeded.get(material)) + "/" + nf.format(totalItemsRequired.get(material))))
-                    .addLine(Component.text( completionPercentage + "% Complete"))
+                    .addLine(Component.text(nf.format(itemsNeeded.get(material)) + "/" + nf.format(totalItemsRequired.get(material))).style(defaultStyle))
+                    .addLine(Component.text( completionPercentage + "% Complete").style(defaultStyle))
                     .addLine(buildProgressBar(completionPercentage))
                     .build()
             );
@@ -109,7 +112,7 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
         }
 
         controlItem.setData(DataComponentTypes.LORE, controlItemLore
-                .addLine(Component.text(goal.getTotalCompletionPercent()*100 + "% completed"))
+                .addLine(Component.text(goal.getTotalCompletionPercent()*100 + "% completed").style(defaultStyle))
                 .addLine(buildProgressBar(goal.getTotalCompletionPercent()))
                 .build());
         this.inventory.setItem(13, controlItem);

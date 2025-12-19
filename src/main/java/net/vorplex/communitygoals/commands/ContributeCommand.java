@@ -20,7 +20,7 @@ public class ContributeCommand {
 
     public static LiteralCommandNode<CommandSourceStack> COMMAND_NODE = Commands.literal("contribute")
                 .requires(ctx -> ctx.getSender() instanceof Player)
-                .then(Commands.argument("goal", StringArgumentType.word())
+                .then(Commands.argument("goalID", StringArgumentType.word())
                         .suggests(ContributeCommand::getGoalSuggestions)
                         .executes(ContributeCommand::executeCommand)
                 ).build();

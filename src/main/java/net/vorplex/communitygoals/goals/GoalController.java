@@ -77,7 +77,7 @@ public class GoalController {
                 Material material = Material.matchMaterial(itemID);
                 if (material == null){
                     material = Material.BARRIER;
-                    PLUGIN.getComponentLogger().error("Material " + itemID + " is not a valid material for goal " + goalID);
+                    PLUGIN.getComponentLogger().error("Material {} is not a valid material for goal {}", itemID, goalID);
                 }
                 reqItems.put(material, PLUGIN.getConfig().getInt("goals." + goalID + ".required-items." + itemID));
             });

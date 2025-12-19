@@ -100,10 +100,13 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
             );
         });
 
-        //TODO add blank slots on sides on centered goal items
-        //center top row of goal items
-        int startSlot = (9-goalItems.size())/2;
-        for (int i = 0; i < 9; i++) {
+        // Fill top row with dividers
+        for (int i = 0; i < 9; i++)
+            inventory.setItem(i, dividerItem);
+
+        // Center goal items
+        int startSlot = (9 - goalItems.size()) / 2;
+        for (int i = 0; i < goalItems.size(); i++) {
             inventory.setItem(startSlot + i, goalItems.get(i));
         }
 

@@ -42,5 +42,6 @@ public class InventoryCloseListener implements Listener {
         player.sendMessage(Component.text("Your contribution has been added to the total goal!").color(NamedTextColor.GREEN));
         for (int i = 18; i < inventory.getSize(); i++)
             inventory.setItem(i, null);
+        //TODO check for goal completion post contribution
     }
 }

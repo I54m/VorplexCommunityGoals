@@ -63,6 +63,7 @@ public class GoalController {
     }
 
     public void LoadGoals() {
+        //TODO check for data not matching up with config if config has been altered
         if (!PLUGIN.GOALS_DATA_DIRECTORY.exists()) {
             PLUGIN.getComponentLogger().info(Component.text("Goals data directory was not found, Creating...").color(NamedTextColor.YELLOW));
             if (!PLUGIN.getDataFolder().exists()) PLUGIN.getDataFolder().mkdir();

@@ -73,10 +73,14 @@ public class GoalController {
         PLUGIN.getComponentLogger().info(Component.text("Attempting to load Goals from config...").color(NamedTextColor.GREEN));
         Objects.requireNonNull(PLUGIN.CONFIG.getConfigurationSection("goals")).getKeys(false).forEach(goalID -> {
             Map<Material, Integer> reqItems = new HashMap<>();
-            //TODO check Material is a valid material
-            Objects.requireNonNull(PLUGIN.getConfig().getConfigurationSection("goals." + goalID + ".required-items")).getKeys(false).forEach(itemID ->
-                reqItems.put(Material.getMaterial(itemID), PLUGIN.getConfig().getInt("goals." + goalID + ".required-items." + itemID))
-            );
+            Objects.requireNonNull(PLUGIN.getConfig().getConfigurationSection("goals." + goalID + ".required-items")).getKeys(false).forEach(itemID -> {
+                Material material = Material.matchMaterial(itemID);
+                if (material == null){
+                    material = Material.BARRIER;
+                    PLUGIN.getComponentLogger().error("Material " + itemID + " is not a valid material for goal " + goalID);
+                }
+                reqItems.put(material, PLUGIN.getConfig().getInt("goals." + goalID + ".required-items." + itemID));
+            });
 
             ConfigurationSection goalConfig = Objects.requireNonNull(PLUGIN.CONFIG.getConfigurationSection("goals." + goalID));
             Goal goal = new Goal(goalID,

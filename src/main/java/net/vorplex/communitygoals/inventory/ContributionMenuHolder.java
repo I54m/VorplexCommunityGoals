@@ -183,7 +183,7 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
                         + "|".repeat(remaining)
                         + "<gray>]";
 
-        return MiniMessage.miniMessage().deserialize(bar);
+        return MiniMessage.miniMessage().deserialize(bar).decoration(TextDecoration.ITALIC, false);
     }
 
 

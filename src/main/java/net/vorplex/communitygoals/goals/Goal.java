@@ -87,7 +87,7 @@ public class Goal {
         this.goalData.setCompleted(!completed.containsValue(false));
     }
 
-    public Map<Material, Integer> getItemsNeeded() {
+    public Map<Material, Integer> getItemsContributed() {
         Objects.requireNonNull(goalData);
         Map<Material, Integer> itemsNeeded = new HashMap<>();
         requiredItems.forEach((material, required) -> {
@@ -95,9 +95,7 @@ public class Goal {
                 itemsNeeded.put(material, 0);
                 return;
             }
-
-            int neededItems = goalData.getCurrentItems().getOrDefault(material, 0) - required;
-            itemsNeeded.put(material, neededItems);
+            itemsNeeded.put(material, goalData.getCurrentItems().getOrDefault(material, 0));
         });
         return itemsNeeded;
     }

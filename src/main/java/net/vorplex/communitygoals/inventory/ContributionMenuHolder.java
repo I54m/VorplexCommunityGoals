@@ -85,7 +85,7 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
     @Override
     public @NotNull Inventory getInventory() {
 
-        Map<Material, Integer> itemsNeeded = goal.getItemsNeeded();
+        Map<Material, Integer> itemsContributed = goal.getItemsContributed();
         Map<Material, Integer> totalItemsRequired = goal.getRequiredItems();
         Map<Material, Double> completionPercentages = goal.getCompletionPercentages();
 
@@ -94,7 +94,7 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
             double completionPercentage = completionPercentages.get(material);
 
             goalItem.setData(DataComponentTypes.LORE, ItemLore.lore()
-                    .addLine(Component.text(nf.format(itemsNeeded.get(material)) + "/" + nf.format(totalItemsRequired.get(material))).style(defaultStyle))
+                    .addLine(Component.text(nf.format(itemsContributed.get(material)) + "/" + nf.format(totalItemsRequired.get(material))).style(defaultStyle))
                     .addLine(Component.text( completionPercentage + "% Complete").style(defaultStyle))
                     .addLine(buildProgressBar(completionPercentage))
                     .build()

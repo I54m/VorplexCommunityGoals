@@ -58,7 +58,10 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
         goal.getRequiredItems().forEach(((material, integer) -> {
             ItemStack goalItem = new ItemStack(material);
             Component name = goalItem.displayName();
-            goalItem.setData(DataComponentTypes.CUSTOM_NAME, Component.text(nf.format(integer) + "x ").append(name));
+            if (goalItem.getType() != Material.BARRIER)
+                goalItem.setData(DataComponentTypes.CUSTOM_NAME, Component.text(nf.format(integer) + "x ERROR: Unknown Item!!").color(NamedTextColor.RED));
+            else
+                goalItem.setData(DataComponentTypes.CUSTOM_NAME, Component.text(nf.format(integer) + "x ").append(name));
             goalItems.add(new ItemStack(material));
         }));
         if (goalItems.size() > 9)

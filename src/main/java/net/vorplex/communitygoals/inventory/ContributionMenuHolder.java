@@ -91,14 +91,12 @@ public class ContributionMenuHolder implements InventoryHolder {
             );
         });
 
-
-
-        //TODO blank center spot if % 2
         // Center goal items
         int startSlot = (9 - goalItems.size()) / 2;
         for (int i = 0; i < goalItems.size(); i++) {
             inventory.setItem(startSlot + i, goalItems.get(i));
         }
+        if (goalItems.size()%2==0) inventory.setItem(4, dividerItem);
 
         controlItemLore.set(2, Component.text(goal.getTotalCompletionPercent()*100 + "% completed").style(defaultStyle));
         controlItemLore.set(3, buildProgressBar(goal.getTotalCompletionPercent()));

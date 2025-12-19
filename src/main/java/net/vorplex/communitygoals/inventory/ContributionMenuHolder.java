@@ -9,14 +9,7 @@ import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.vorplex.communitygoals.VorplexCommunityGoals;
 import net.vorplex.communitygoals.goals.Goal;
-import net.vorplex.communitygoals.goals.PlayerContribution;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -25,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import java.text.NumberFormat;
 import java.util.*;
 
-public class ContributionMenuHolder implements InventoryHolder, Listener {
+public class ContributionMenuHolder implements InventoryHolder {
 
     private final NumberFormat nf = NumberFormat.getIntegerInstance(Locale.US);
     private final Style defaultStyle = Style.style().color(NamedTextColor.WHITE).decoration(TextDecoration.ITALIC, false).build();
@@ -110,54 +103,6 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
 
         return inventory;
     }
-
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onInventoryClick(InventoryClickEvent event) {
-        Inventory inventory = event.getClickedInventory();
-        if (inventory == null || !(inventory.getHolder(false) instanceof ContributionMenuHolder)) return;
-        //prevent moving the divider items, control item or any of the goal items
-        if (event.getCurrentItem() != null && (
-                event.getCurrentItem().equals(dividerItem) ||
-                event.getCurrentItem().equals(controlItem) ||
-                goalItems.contains(event.getCurrentItem())
-        )) {
-            event.setCancelled(true);
-            return;
-        }
-
-        if (!goal.getRequiredItems().containsKey(event.getCurrentItem().getType())) {
-            event.setCancelled(true);
-            event.getWhoClicked().sendMessage(Component.text("That item is not needed for this goal!").color(NamedTextColor.RED));
-        }
-    }
-
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onInventoryClose(InventoryCloseEvent event) {
-        if (!(event.getPlayer() instanceof Player player)) return;
-        Inventory inventory = event.getInventory();
-        if (!(inventory.getHolder(false) instanceof ContributionMenuHolder)) return;
-        Map<Material, Integer> itemAmounts = new HashMap<>();
-        Arrays.stream(inventory.getContents()).filter(content ->
-                content!= null &&
-                !content.equals(dividerItem) &&
-                !content.equals(controlItem) &&
-                !goalItems.contains(content)
-        ).forEach(content -> {
-            if (itemAmounts.containsKey(content.getType()))
-                itemAmounts.put(content.getType(), itemAmounts.get(content.getType()) + content.getAmount());
-            else
-                itemAmounts.put(content.getType(), content.getAmount());
-        });
-
-        PlayerContribution contribution = new PlayerContribution(goal, player);
-        contribution.AddItems(itemAmounts);
-        goal.AddContribution(contribution);
-        //TODO more user feedback post contribution
-        player.sendMessage(Component.text("Your contribution has been added to the total goal!").color(NamedTextColor.GREEN));
-        for (int i = 18; i < inventory.getSize(); i++)
-            inventory.setItem(i, null);
-    }
-
 
     private Component buildProgressBar(double progress) {
         int barLength = 20;

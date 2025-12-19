@@ -52,7 +52,9 @@ public final class VorplexCommunityGoals extends JavaPlugin {
         });
         getComponentLogger().info(Component.text("Registered Commands!").color(NamedTextColor.GREEN));
         getComponentLogger().info(Component.text("Registering event listeners...").color(NamedTextColor.GREEN));
-
+        GOAL_CONTROLLER.getGoals().forEach((goalID, goal) -> 
+                getServer().getPluginManager().registerEvents(goal.getContributionMenu(), this)
+        );
         getComponentLogger().info(Component.text("Registered event listeners!").color(NamedTextColor.GREEN));
         getComponentLogger().info(Component.text("Plugin loaded in: " + (System.nanoTime() - startTime) / 1000000 + "ms!").color(NamedTextColor.GREEN));
         getComponentLogger().info("───────────────────────────────────────────────────────────");

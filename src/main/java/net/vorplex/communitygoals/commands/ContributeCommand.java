@@ -32,7 +32,7 @@ public class ContributeCommand {
         return builder.buildFuture();
     }
 
-    private static int executeCommand(final CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+    private static int executeCommand(final CommandContext<CommandSourceStack> ctx) {
         final Player player = (Player) ctx.getSource().getSender();
         final String goalID = ctx.getArgument("goalID", String.class);
         player.openInventory(plugin.GOAL_CONTROLLER.getGoal(goalID).getContributionMenu().getInventory());

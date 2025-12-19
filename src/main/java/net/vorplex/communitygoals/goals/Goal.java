@@ -2,6 +2,7 @@ package net.vorplex.communitygoals.goals;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.vorplex.communitygoals.inventory.ContributionMenuHolder;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,6 +35,9 @@ public class Goal {
     @Getter @Setter @Nullable
     private GoalData goalData;
 
+    @Getter @NotNull
+    private final ContributionMenuHolder contributionMenu;
+
     public boolean isActive() {
         return System.currentTimeMillis() >= startTime && System.currentTimeMillis() <= endTime;
     }
@@ -47,6 +51,7 @@ public class Goal {
         this.endTime = parseTime(endTime);
         if (this.endTime < this.startTime) throw new IllegalArgumentException("End time cannot be less than start time");
         this.requiredItems.putAll(Objects.requireNonNull(requiredItems));
+        contributionMenu = new ContributionMenuHolder(this);
     }
 
     private long parseTime(String input) {

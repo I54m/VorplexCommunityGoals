@@ -60,7 +60,7 @@ public class Goal {
 
     public void AddContribution(@NotNull PlayerContribution contribution) {
         Objects.requireNonNull(goalData);
-        if (contribution.getGoalID().equals(this.goalID)) throw new IllegalArgumentException("This contribution is not for this goal!");
+        if (!contribution.getGoalID().equals(this.goalID)) throw new IllegalArgumentException("This contribution("+contribution.getGoalID()+") is not for this goal("+this.goalID+")!");
         if (goalData.getContributors().containsKey(contribution.getPlayerUUID()))
             goalData.getContributors().get(contribution.getPlayerUUID()).AddItems(contribution.getContributions());
         else goalData.getContributors().put(contribution.getPlayerUUID(), contribution);

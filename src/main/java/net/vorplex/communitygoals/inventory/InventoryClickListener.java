@@ -23,6 +23,7 @@ public class InventoryClickListener implements Listener {
             event.setCancelled(true);
             return;
         }
+        //TODO prevent over contributing items
 
         //TODO this does not work until the item is already in the contribution inventory
         if (!menuHolder.getGoal().getRequiredItems().containsKey(event.getCurrentItem().getType())) {

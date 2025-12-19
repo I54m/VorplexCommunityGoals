@@ -34,6 +34,7 @@ public class ContributeCommand {
     private static int executeCommand(final CommandContext<CommandSourceStack> ctx) {
         final Player player = (Player) ctx.getSource().getSender();
         final String goalID = ctx.getArgument("goalID", String.class);
+        //TODO prevent contributing to a goal that is completed, not enabled, has passed the end time or the start time has not passed
         player.openInventory(plugin.GOAL_CONTROLLER.getGoal(goalID).getContributionMenu().getInventory());
         return Command.SINGLE_SUCCESS;
     }

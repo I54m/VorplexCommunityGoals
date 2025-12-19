@@ -21,13 +21,13 @@ public class InventoryCloseListener implements Listener {
     public void onInventoryClose(InventoryCloseEvent event) {
         if (!(event.getPlayer() instanceof Player player)) return;
         Inventory inventory = event.getInventory();
-        if (!(inventory.getHolder(false) instanceof ContributionMenuHolder)) return;
+        if (!(inventory.getHolder(false) instanceof ContributionMenuHolder menuHolder)) return;
         Map<Material, Integer> itemAmounts = new HashMap<>();
         Arrays.stream(inventory.getContents()).filter(content ->
                 content!= null &&
-                        !content.equals(dividerItem) &&
-                        !content.equals(controlItem) &&
-                        !goalItems.contains(content)
+                        !content.equals(menuHolder.getDividerItem()) &&
+                        !content.equals(menuHolder.getControlItem()) &&
+                        !menuHolder.getGoalItems().contains(content)
         ).forEach(content -> {
             if (itemAmounts.containsKey(content.getType()))
                 itemAmounts.put(content.getType(), itemAmounts.get(content.getType()) + content.getAmount());
@@ -35,9 +35,9 @@ public class InventoryCloseListener implements Listener {
                 itemAmounts.put(content.getType(), content.getAmount());
         });
 
-        PlayerContribution contribution = new PlayerContribution(goal, player);
+        PlayerContribution contribution = new PlayerContribution(menuHolder.getGoal(), player);
         contribution.AddItems(itemAmounts);
-        goal.AddContribution(contribution);
+        menuHolder.getGoal().AddContribution(contribution);
         //TODO more user feedback post contribution
         player.sendMessage(Component.text("Your contribution has been added to the total goal!").color(NamedTextColor.GREEN));
         for (int i = 18; i < inventory.getSize(); i++)

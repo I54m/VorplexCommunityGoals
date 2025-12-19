@@ -30,8 +30,8 @@ public class PlayerContribution {
     }
 
     public void AddItems(@NotNull Map<Material, Integer> contribution) {
-        contribution.keySet().forEach(material -> {
-            contributions.put(material, contributions.get(material) + contribution.get(material));
+        contribution.forEach((material, amount) -> {
+            contributions.merge(material, amount, Integer::sum);
         });
     }
 }

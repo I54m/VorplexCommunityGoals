@@ -90,23 +90,23 @@ public class GoalController {
                     goalConfig.getString("start-time"),
                     goalConfig.getString("end-time"),
                     reqItems);
-            try {
-                goal.setGoalData(LoadGoalData(goalID));
-            } catch (FileNotFoundException e) {
-                PLUGIN.getComponentLogger().error("Unable to find data file for Goal: {}", goalID);
-            }
+            goal.setGoalData(LoadGoalData(goalID));
             Goals.put(goal.getGoalID(), goal);
         });
     }
 
-    private GoalData LoadGoalData(@NotNull String goalID) throws FileNotFoundException {
-        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        final File file = new File(PLUGIN.GOALS_DATA_DIRECTORY, goalID + ".json");
-        final FileReader reader = new FileReader(file);
-        GoalData json = gson.fromJson(reader, GoalData.class);
-        if (json != null) {
-            return json;
-        } else PLUGIN.getComponentLogger().warn(Component.text("File " + file.toPath() + " was empty - skipping").color(NamedTextColor.YELLOW));
+    private GoalData LoadGoalData(@NotNull String goalID) {
+        try {
+            final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            final File file = new File(PLUGIN.GOALS_DATA_DIRECTORY, goalID + ".json");
+            final FileReader reader = new FileReader(file);
+            GoalData json = gson.fromJson(reader, GoalData.class);
+            if (json != null)
+                return json;
+             else PLUGIN.getComponentLogger().warn(Component.text("File " + file.toPath() + " was empty - skipping").color(NamedTextColor.YELLOW));
+        } catch (FileNotFoundException e) {
+            PLUGIN.getComponentLogger().error("Unable to find data file for Goal: {}", goalID);
+        }
         return new GoalData(goalID, false, new HashMap<>(), new HashMap<>());
     }
 

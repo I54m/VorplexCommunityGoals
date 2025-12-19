@@ -130,7 +130,10 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
                 event.getCurrentItem().equals(dividerItem) ||
                 event.getCurrentItem().equals(controlItem) ||
                 goalItems.contains(event.getCurrentItem())
-        )) event.setCancelled(true);
+        )) {
+            event.setCancelled(true);
+            return;
+        }
 
         if (!goal.getRequiredItems().containsKey(event.getCurrentItem().getType())) {
             event.setCancelled(true);

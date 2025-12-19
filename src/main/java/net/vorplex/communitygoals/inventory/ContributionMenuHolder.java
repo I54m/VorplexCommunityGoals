@@ -2,7 +2,6 @@ package net.vorplex.communitygoals.inventory;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.ItemLore;
-import lombok.Getter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -29,16 +28,12 @@ public class ContributionMenuHolder implements InventoryHolder, Listener {
     private final NumberFormat nf = NumberFormat.getIntegerInstance(Locale.US);
 
     private final Inventory inventory;
-
-    @Getter
     private final ItemStack dividerItem;
-    @Getter
     private final ItemStack controlItem;
     //TODO better control item lore
     private ItemLore.Builder controlItemLore = ItemLore.lore()
             .addLine(Component.text("/\\ Required Items").color(NamedTextColor.WHITE))
             .addLine(Component.text("\\/ Items to contribute").color(NamedTextColor.WHITE));
-    @Getter
     private final List<ItemStack> goalItems;
     private final Goal goal;
 

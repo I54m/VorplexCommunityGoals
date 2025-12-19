@@ -85,7 +85,7 @@ public class ContributionMenuHolder implements InventoryHolder {
 
             goalItem.setData(DataComponentTypes.LORE, ItemLore.lore()
                     .addLine(Component.text(nf.format(itemsContributed.get(material)) + "/" + nf.format(totalItemsRequired.get(material))).style(defaultStyle))
-                    .addLine(Component.text( completionPercentage + "% Complete").style(defaultStyle))
+                    .addLine(Component.text( completionPercentage*100 + "% Complete").style(defaultStyle))
                     .addLine(buildProgressBar(completionPercentage))
                     .build()
             );

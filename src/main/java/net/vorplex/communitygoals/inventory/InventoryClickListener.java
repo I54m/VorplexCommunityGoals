@@ -24,6 +24,7 @@ public class InventoryClickListener implements Listener {
             return;
         }
 
+        //TODO this does not work until the item is already in the contribution inventory
         if (!menuHolder.getGoal().getRequiredItems().containsKey(event.getCurrentItem().getType())) {
             event.setCancelled(true);
             event.getWhoClicked().sendMessage(Component.text("That item is not needed for this goal!").color(NamedTextColor.RED));
